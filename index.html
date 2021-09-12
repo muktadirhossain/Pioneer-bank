@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Pioneer Bank</title>
+  </head>
+  <body>
+
+    <div id="transactionArea" class="container">
+
+        <h1 class="heading text-center pb-5">Welcome to Pioneer Bank </h1>
+
+        <div class="row gx-5 gy-xm-2 container">
+            <div class="col">
+                <div class="status Deposit">
+                    <h5>Deposit</h5>
+                    <h2>$<span id="currentDeposit">00</span></h2>
+                </div>
+            </div>
+            <div class="col">
+                <div class="status Withdraw">
+                    <h5>Withdraw</h5>
+                    <h2>$<span id="withdraw">00</span></h2>
+                </div>
+            </div>
+            <div class="col">
+                <div class="status Balance">
+                    <h5>Balance</h5>
+                    <h2>$ <span id="balanceAmount">1240</span> </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row containe">
+            <div class="col-lg-6">
+                <div class="box-input">
+                <h5 class="pb-4">Deposit</h5>
+                <input id="depositAmount" class="mb-4 form-control form-control-lg" type="number" placeholder="$ Amount You Want to Deposit">
+                <button id="depositBtn" class="btn btn-success">Deposit</button>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="box-input">
+                <h5 class="pb-4">Withdraw</h5>
+                <input id="withdrawAmount" class="mb-4 form-control form-control-lg" type="number" placeholder="$ Amount You Want to Withdraw">
+                <button id="withdrawBtn" class="btn btn-success">Withdraw</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- New section -->
+
+      <div id="loginArea">
+        <h1 class="heading text-center pb-5">Welcome to Pioneer Bank </h1>
+
+        <div class="box-div">
+            <h2 class="heading mb-4">Login</h2>
+            <form action="#">
+                <input class="d-block w-100 mb-3 form-control" type="mail" placeholder="Email">
+                <input class="d-block w-100 mb-4 form-control" type="password" placeholder="Password">
+                <button id="login" type="submit" class="btn btn-success">Enter</button>
+            </form>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+    <!-- My Js codes -->
+    <script>
+
+        //login btn event handler 
+        const loginBtn = document.getElementById('login');
+        loginBtn.addEventListener('click',function(){
+            const loginArea = document.getElementById('loginArea');
+            loginArea.style.display = "none";
+            const transactionArea = document.getElementById('transactionArea');
+            transactionArea.style.display ="block"
+        })
+         
+        //========deposit btn handler===========
+
+            // ===========Function Declaration Area Starts =============
+
+        function spanIntoNumber(id,depositInputNumber){
+                const currentDeposit = document.getElementById(id).innerText;
+                const currentDepositNumber = parseFloat(currentDeposit);
+                const totalDeposit = currentDepositNumber + depositInputNumber;
+                document.getElementById(id).innerText = totalDeposit;
+                }
+        function inputIntoNumber(id){
+            const Input = document.getElementById(id).value;
+            const InputNumber = parseFloat(Input);
+            return InputNumber;
+        }
+         // ===========Function Declaration Area End =============
+
+
+        const depositBtn = document.getElementById('depositBtn');
+        
+        depositBtn.addEventListener('click',function(event){           
+            const depositInputNumber = inputIntoNumber('depositAmount');
+
+            spanIntoNumber('currentDeposit', depositInputNumber);
+
+            document.getElementById('depositAmount').value = "";
+
+            spanIntoNumber('balanceAmount',depositInputNumber );
+               
+            })
+            
+            // ============withdraw section code =========
+
+            const withdrawBtn = document.getElementById('withdrawBtn');
+            withdrawBtn.addEventListener('click',function(event){
+
+                const withdrawInputNumber = inputIntoNumber('withdrawAmount');
+
+                spanIntoNumber('withdraw',withdrawInputNumber);
+                document.getElementById('withdrawAmount').value = "";
+
+                spanIntoNumber('balanceAmount', -1 * withdrawInputNumber);
+
+            })
+
+    </script>
+  </body>
+</html>
